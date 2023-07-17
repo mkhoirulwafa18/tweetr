@@ -1,8 +1,15 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:twitter_clone/core/providers.dart';
 
 import '../core/core.dart';
+
+final authAPIProvider = Provider((ref) {
+  final account = ref.watch(appWriteAccountProvider);
+  return AuthAPI(account: account);
+});
 
 abstract class IAuthAPI {
   FutureEither<User> signUp({
@@ -31,5 +38,3 @@ class AuthAPI implements IAuthAPI {
     }
   }
 }
-
-// TODO(mkhoirulwafa18): continue on this https://youtu.be/njLEDvoDjtk?t=4629
